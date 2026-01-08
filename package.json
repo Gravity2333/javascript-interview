@@ -1,12 +1,16 @@
 {
-  "name": "javascipt-interview",
+  "name": "Javascipt-Interview",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mock": "nodemon ./tools/mockServer.js -exec node ./tools/mockServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "packageManager": "pnpm@10.11.1",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
