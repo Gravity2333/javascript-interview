@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mock": "nodemon ./tools/mockServer.js -exec node ./tools/mockServer.js"
+    "mock": "nodemon ./tools/mockServer.js -exec node ./tools/mockServer.js",
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.9.3"
   }
 }

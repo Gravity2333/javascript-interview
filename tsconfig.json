@@ -1,0 +1,42 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    "outDir": "dist",
+    // File Layout
+    // "rootDir": "./src",
+    // "outDir": "./dist",
+
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "commonjs",
+    "target": "esnext",
+    "lib":["esnext"],
+    "types": ["node"],
+    "removeComments": true,
+    "moduleResolution": "node",
+    // For nodejs:
+    // "lib": ["esnext"],
+    // "types": ["node"],
+    // and npm install -D @types/node
+
+    // Other Outputs
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    // "strictPropertyInitialization": true,
+    // "noImplicitAny": true,
+    "allowJs": false,
+    "checkJs": false,
+    "noImplicitThis": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": ["./装饰器/"],
+  "exclude": []
+}
