@@ -22,3 +22,15 @@ const interval = setInterval(() => {
   count++;
   if (count > 5) clearInterval(interval);
 }, 300); // 每 300ms 调用一次
+
+
+function throttle(fn,delay=300){
+  let timer 
+  return function(...args){
+    if(timer) return
+    fn.call(this,...args)
+    timer = setTimeout(()=>{
+      timer = null
+    },delay)
+  }
+}

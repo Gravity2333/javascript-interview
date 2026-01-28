@@ -21,3 +21,11 @@ const debouncedLog = debounce(logMessage, 1000); // 1秒防抖
 debouncedLog("第一次调用");
 debouncedLog("第二次调用");
 debouncedLog("第三次调用");
+
+function debounce(fn,delay=300){
+  let timer 
+  return function(...args){
+    clearTimeout(timer)
+    timer = setTimeout(fn.bind(this,...args),delay)
+  }
+}
