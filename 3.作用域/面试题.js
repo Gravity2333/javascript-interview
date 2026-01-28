@@ -119,7 +119,6 @@
 // }
 // foo();
 
-
 /** 提升的过程中
  *  var 先赋 undefined function后赋 所以同名时 函数会覆盖var 即函数优先 所以第一个为function a
  * 然而 函数提升过后，后面就不会再次创建函数对象了，而var一开始初始化为undefined 后面执行到var a=10的时候 还会执行 a=10 会继续覆盖掉函数 所以第二个为 10
@@ -154,11 +153,10 @@
 
 // fn(100)
 
-/** 函数的参数 会在预处理阶段 优先作为一个var 放到函数词法环境中 
+/** 函数的参数 会在预处理阶段 优先作为一个var 放到函数词法环境中
  * var a 就不会替换了
  * 但是换成function a(){} 就会替换
  */
-
 
 // function fn(){
 //     a = 10
@@ -169,13 +167,13 @@
 // fn()
 // console.log(global.a,a) // a 没有挂到全局
 
-/** 预处理阶段 var a undefined 
+/** 预处理阶段 var a undefined
  *  执行到a=10 a: 10
  *  执行到a=20 a: 20
  *  结果a20
- * 
+ *
  * 外部global.a 可拿不到a啊
- * 
+ *
  */
 
 // function fn(){
@@ -187,4 +185,3 @@
 // console.log(global.a,a) // 这样才挂到外部啊
 
 /** fn内没有var的时候 或者参数没有a的时候 才会挂全局啊 */
-
