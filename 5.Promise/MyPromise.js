@@ -101,6 +101,9 @@ MyPromise.prototype.then = function (
     throw reason;
   },
 ) {
+  /** 传入的是普通值的情况 */
+  if (typeof onFulfilled !== "function") onFulfilled = (val) => val;
+  if (typeof onRejected !== "function") onRejected = (val) => val;
   const self = this;
   return new MyPromise((resolve, reject) => {
     const runThenCallback = () => {
@@ -468,3 +471,4 @@ function testMyPromiseAdvanced(MyPromise) {
 }
 
 testMyPromiseAdvanced(MyPromise);
+// MyPromise.resolve(1).then(2).then(Promise.resolve(3)).then(console.log)
