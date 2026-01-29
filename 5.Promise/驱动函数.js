@@ -18,6 +18,12 @@ function* asyncFn() {
   try {
     let a = yield 1;
     console.log(a);
+    let b1 = yield new Promise((r, rj) =>
+      setTimeout(() => {
+        r("succ form promise");
+      }, 1000),
+    );
+    console.log(b1);
     let b = yield new Promise((r, rj) =>
       setTimeout(() => {
         rj("err form promise");
