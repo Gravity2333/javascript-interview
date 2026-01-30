@@ -13,6 +13,7 @@
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
     "express": "^5.2.1",
+    "my-sample-scheduler": "^1.0.7",
     "reflect-metadata": "^0.2.2",
     "typescript": "^5.9.3"
   }
