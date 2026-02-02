@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage 事件</title>
+</head>
+
+<body>
+    <input />
+    <button>send</button>
+    <ul></ul>
+    <script>
+        const input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const list = document.querySelector('ul')
+        btn.addEventListener('click', () => {
+            localStorage.setItem('TEST_COMM', input.value)
+        })
+        window.onstorage = ev => {
+            if (ev.key !== 'TEST_COMM') return
+            const li = document.createElement('li')
+            li.innerHTML = ev.newValue
+            list.appendChild(li)
+        }
+    </script>
+</body>
+
+</html>

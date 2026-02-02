@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>windowOpen.</title>
+</head>
+
+<body>
+    <input />
+    <button>send</button>
+    <button id="open">open</button>
+    <ul></ul>
+    <script>
+        const input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const btnOpen = document.querySelector('button#open')
+        const list = document.querySelector('ul')
+
+        let sender
+
+        btn.addEventListener('click', () => {
+            if (sender) {
+                sender.postMessage(input.value, '*')
+            } else {
+                alert('没有建立连接 请先open')
+            }
+        })
+        window.addEventListener('message', ev => {
+
+            if (ev.data === 'SYNC') {
+
+                if (!sender) {
+                    sender = ev.source
+                }
+                return
+            } else {
+                const li = document.createElement('li')
+                li.innerHTML = ev.data
+                list.appendChild(li)
+            }
+        })
+
+        btnOpen.addEventListener('click', () => {
+            if (sender) {
+                return alert('连接已经建立!')
+            }
+            sender = window.open('./windowOpen.html')
+            setTimeout(() => { sender.postMessage('SYNC', '*') }, 4)
+        })
+    </script>
+</body>
+
+</html>

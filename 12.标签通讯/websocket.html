@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Socket Demo</title>
+</head>
+
+<body>
+    <input />
+    <button>send</button>
+    <ul></ul>
+    <script>
+        const wss = new WebSocket('ws://localhost:3411')
+        const input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const list = document.querySelector('ul')
+
+        btn.addEventListener('click', () => {
+            wss.send(input.value)
+        })
+
+        wss.onmessage = ev => {
+            const fr = new FileReader()
+            fr.onload = (e) => {
+                const li = document.createElement('li')
+                li.innerHTML = e.target.result
+                list.appendChild(li)
+            }
+            fr.readAsText(ev.data)
+        }
+
+        window.onunload = ()=>{
+            wss.close()
+        }
+    </script>
+</body>
+
+</html>

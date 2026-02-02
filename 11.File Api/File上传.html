@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="file-input" type="file" multiple />
+    <div id="file-dragger" dropable style="width:200px;height:200px;background-color:skyblue">drag file</div>
+
+    <script>
+        const fileInput = document.querySelector('#file-input')
+
+        window.addEventListener('change', e => {
+            e.preventDefault()
+            e.stopPropagation()
+
+            console.log(fileInput.files)
+        })
+        const dragger = document.querySelector('#file-dragger')
+        // 禁用默认打开文件
+        window.addEventListener('dragover', e => {
+            e.preventDefault()
+            e.stopPropagation()
+        })
+        // 放下文件
+        window.addEventListener('drop', e => {
+            e.preventDefault()
+            e.stopPropagation()
+            console.log(e.dataTransfer.files)
+        })
+    </script>
+
+    <script>
+        const file = new File(['my file!', '我的文件'], 'myfile.txt', { type: "text/plain" })
+        console.log(file)
+
+        // DataUrl
+        // const fr = new FileReader()
+        // fr.onload = e => console.log(e.target.result)
+        // fr.readAsDataURL(file)
+
+        // BinaryString 一个字节为单位 输出 对于中文非ascii乱码
+        // const fr = new FileReader()
+        // fr.onload = e => console.log(e.target.result)
+        // fr.readAsBinaryString(file)
+
+        // Text Utf-8
+        // const fr = new FileReader()
+        // fr.onload = e => console.log(e.target.result)
+        // fr.readAsText(file)
+
+        // ArrayBuffer
+        const fr = new FileReader()
+        fr.onload = e => {
+            console.log(e.target.result)
+            const arrayBuffer = e.target.result
+            const uint = new Uint8Array(arrayBuffer)
+            console.log(uint)
+
+            const dv = new DataView(arrayBuffer)
+            dv.getInt8(0)
+            dv.setInt8(0, 0)
+
+            console.log(URL.createObjectURL(new Blob([arrayBuffer])))
+        }
+        fr.readAsArrayBuffer(file)
+
+
+
+    </script>
+</body>
+
+</html>

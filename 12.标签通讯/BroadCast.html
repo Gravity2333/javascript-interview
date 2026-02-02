@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broad Cast Channel Demo</title>
+</head>
+
+<body>
+    <input />
+    <button>send</button>
+    <ul></ul>
+    <script>
+        const broadCaseChannel = new BroadcastChannel('TEST_CHANNEL')
+        const input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const list = document.querySelector('ul')
+        btn.addEventListener('click', () => {
+            broadCaseChannel.postMessage(input.value)
+        })
+        broadCaseChannel.onmessage = ev => {
+            const li = document.createElement('li')
+            li.innerHTML = ev.data
+            list.appendChild(li)
+        }
+    </script>
+</body>
+
+</html>

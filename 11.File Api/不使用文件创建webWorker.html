@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // objectUrl
+        const file = new File([`
+         self.onmessage = ev => {
+               const dataList = []
+                for(let i=0;i<ev.data;i++){
+                    dataList.push(i)
+                }
+            self.postMessage(dataList)
+         }
+
+        `], 'worker.js', { type: 'application/javascript' })
+        console.log(URL.createObjectURL(file))
+        const worker1 = new Worker(URL.createObjectURL(file))
+        worker1.onmessage = ev => {
+            console.log(ev.data)
+        }
+        worker1.postMessage(1000)
+
+
+        // dataUrl
+        // objectUrl
+        const FileDataUrl = `data:application/javascript;utf-8,
+         self.onmessage = ev => {
+               const dataList = []
+                for(let i=0;i<ev.data;i++){
+                    dataList.push(i)
+                }
+            self.postMessage(dataList)
+         }
+        `
+        console.log(FileDataUrl)
+        const worker = new Worker(FileDataUrl)
+        worker.onmessage = ev => {
+            console.log(ev.data)
+        }
+        worker.postMessage(1000)
+
+    </script>
+</body>
+
+</html>
