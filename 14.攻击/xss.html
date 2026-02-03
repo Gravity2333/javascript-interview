@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xss demo</title>
+</head>
+
+<body>
+    <input id="input" />
+    <div id="content"></div>
+
+    <script>
+
+        function escapeString(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        const input = document.querySelector('#input')
+        const content = document.querySelector('#content')
+        input.addEventListener('input', () => {
+            const escaped = escapeString(input.value)
+            console.log(escaped)
+            content.innerHTML ='input:'+ escaped
+            // content.innerText = input.value
+        })
+    </script>
+</body>
+
+</html>
