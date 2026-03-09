@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const code = `
+        self.onmessage = ev => {
+          console.log('msg from main',ev)
+          self.postMessage("recved main from child")
+        }
+        `
+        const encoded = btoa(code)
+        // console.log(code,`data:application/javascipt;utf-8,${encoded}`)
+        // const worker = new Worker(`data:application/javascipt;base64,${encoded}`)
+        const worker = new Worker(`data:application/javascipt;utf-8,${encodeURIComponent(code)}`)
+        worker.onmessage = ev => {
+            console.log('msg from child', ev)
+        }
+        worker.postMessage("main msg 12345")
+    </script>
+</body>
+
+</html>

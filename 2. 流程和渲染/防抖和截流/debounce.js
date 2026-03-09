@@ -29,3 +29,15 @@ function debounce(fn,delay=300){
     timer = setTimeout(fn.bind(this,...args),delay)
   }
 }
+
+function _debounce(fn,delay){
+  let timer
+  return ()=>{
+    if(timer){
+      clearTimeout(timer)
+    }
+    setTimeout(()=>{
+      fn()
+    },delay)
+  }
+}

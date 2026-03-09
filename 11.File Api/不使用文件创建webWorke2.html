@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const code = `
+        self.onmessage = ev => {
+          console.log('msg from main',ev)
+          self.postMessage("recved main from child")
+        }
+        `
+        const b = new Blob([code])
+
+        const worker = new Worker(URL.createObjectURL(b))
+        worker.onmessage = ev => {
+            console.log('msg from child', ev)
+        }
+        worker.postMessage("main msg 12345")
+    </script>
+</body>
+
+</html>
