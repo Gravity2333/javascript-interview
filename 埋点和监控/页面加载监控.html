@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>test</h1>
+
+
+    <script>
+        window.addEventListener('load', function () {
+            console.log(performance.now())
+        })
+
+        // api 监控
+        // 发送向前 接受后
+        function apiPerformace() {
+            const start = performance.now()
+
+            fetch('http://10.0.0.9:7001/').then(res => {
+                const ttfb = performance.now()
+                console.log('ttfb duration:', ttfb - start)
+                const reader = res.body.getReader()
+
+
+                return reader.read()
+            }).then(res => {
+                const end = performance.now()
+                console.log('total duration:', end - start)
+            })
+        }
+
+        apiPerformace()
+    </script>
+</body>
+
+</html>

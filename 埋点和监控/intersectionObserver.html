@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border: 1px solid black;
+            float: left;
+
+        }
+
+        .box::before {
+            content: attr(skuid)
+        }
+    </style>
+    <div class="box" skuid="1"></div>
+    <div class="box" skuid="2"></div>
+    <div class="box" skuid="3"></div>
+    <div class="box" skuid="4"></div>
+    <div class="box" skuid="5"></div>
+    <div class="box" skuid="6"></div>
+    <div class="box" skuid="7"></div>
+    <div class="box" skuid="8"></div>
+    <script>
+        const boxes = document.querySelectorAll('.box')
+        for (const box of boxes) {
+            let isReport = false
+            const observer = new IntersectionObserver((entites) => {
+                for (const entity of entites) {
+                    if (entity.isIntersecting) {
+                        if(isReport) break
+                        isReport = true
+                        console.log(entity.target.getAttribute('skuid'))
+                    }
+                }
+
+            })
+
+            observer.observe(box)
+        }
+    </script>
+</body>
+
+</html>

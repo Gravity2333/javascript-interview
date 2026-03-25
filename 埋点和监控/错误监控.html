@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>error</title>
+</head>
+
+<body>
+    <script>
+        window.onerror = (message, source, line, col, error) => {
+            console.log('捕获到了一个错误', "message", message,)
+            console.log("source", source,)
+            console.log("line", line,)
+            console.log("col", col,)
+            console.log("error", error)
+        }
+
+
+        // throw new Error('my err')
+        ''.push(1)
+    </script>
+</body>
+
+</html>
